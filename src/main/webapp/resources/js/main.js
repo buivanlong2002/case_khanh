@@ -2,52 +2,49 @@ document.addEventListener('DOMContentLoaded', function() {
     'use strict';
 
     const preloader = document.getElementById('preloader');
-    const progressBar = document.querySelector('.preloader-bar-simple'); // Cần nếu muốn kiểm soát width bằng JS
 
     if (preloader) {
-        console.log("main.js: Simple Bar Preloader element found.");
-
         window.addEventListener('load', function() {
-            console.log("main.js: Window fully loaded. Initiating Simple Bar preloader hiding sequence.");
-
-            // Cho animation chạy thêm một chút
-            const hideDelay = 500; // 0.5 giây sau khi trang tải xong
-
+            const hideDelay = 500;
             setTimeout(function() {
-                preloader.classList.add('hiding'); // Kích hoạt transition mờ dần cho logo và thanh
-
-                // Sau khi transition 'hiding' kết thúc (0.4s)
+                preloader.classList.add('hiding');
                 setTimeout(function() {
-                    preloader.classList.add('loaded'); // Ẩn hoàn toàn preloader
-                    console.log("main.js: Preloader set to 'loaded'.");
+                    preloader.classList.add('loaded');
                     if (typeof AOS !== 'undefined') {
                         AOS.refreshHard();
                     }
+                    if (typeof gsap !== 'undefined' && document.querySelector('.hero-text-animated')) {
+                        triggerHeroAnimation();
+                    }
                 }, 400);
-
             }, hideDelay);
         });
 
-        // Fallback an toàn
         const fallbackTimeoutDuration = 8000;
         setTimeout(function() {
             if (!preloader.classList.contains('loaded')) {
-                console.warn("main.js: Preloader fallback timeout. Forcing hide.");
                 if (!preloader.classList.contains('hiding')) {
                     preloader.classList.add('hiding');
                     setTimeout(function() {
                         preloader.classList.add('loaded');
                         if (typeof AOS !== 'undefined') AOS.refreshHard();
+                        if (typeof gsap !== 'undefined' && document.querySelector('.hero-text-animated')) {
+                            triggerHeroAnimation();
+                        }
                     }, 400);
                 } else if (!preloader.classList.contains('loaded')) {
                     preloader.classList.add('loaded');
                     if (typeof AOS !== 'undefined') AOS.refreshHard();
+                    if (typeof gsap !== 'undefined' && document.querySelector('.hero-text-animated')) {
+                        triggerHeroAnimation();
+                    }
                 }
             }
         }, fallbackTimeoutDuration);
-
     } else {
-        console.error("main.js: Preloader element NOT found!");
+        if (typeof gsap !== 'undefined' && document.querySelector('.hero-text-animated')) {
+            triggerHeroAnimation();
+        }
     }
 
     const header = document.querySelector('.header-area');
@@ -63,24 +60,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (typeof AOS !== 'undefined') {
         AOS.init({
-            duration: 1000,
+            duration: 800,
             once: true,
             easing: 'ease-in-out'
         });
     }
 
+    function triggerHeroAnimation() {
+        if (document.querySelector('.hero-text-animated')) {
+            const heroTimeline = gsap.timeline({
+                delay: 0.3
+            });
+
+            const nameWords = gsap.utils.toArray('.animated-name .name-word');
+
+            nameWords.forEach((word, wordIndex) => {
+                const chars = word.querySelectorAll('.char');
+                heroTimeline.to(chars, {
+                    opacity: 1,
+                    y: '0%',
+                    rotateZ: 0,
+                    stagger: 0.1,
+                    duration: 1,
+                    ease: 'power3.out'
+                }, wordIndex * 0.4);
+            });
+
+            heroTimeline.to('.animated-subtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: 'power2.out'
+            }, "-=0.6");
+
+            heroTimeline.to('.hero-text-animated .hero-btns', {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: 'power2.out'
+            }, "-=0.8");
+        }
+    }
+
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        if (document.querySelector('.hero-text')) {
-            gsap.from('.hero-text h1', { y: 50, opacity: 0, duration: 1, delay: 0.5 });
-            gsap.from('.hero-text p', { y: 50, opacity: 0, duration: 1, delay: 0.8 });
-            gsap.from('.hero-text .hero-btn', { y: 50, opacity: 0, duration: 1, delay: 1.1, stagger: 0.2 });
+        if (!preloader || preloader.classList.contains('loaded')) {
+            if (document.querySelector('.hero-text-animated')) {
+                triggerHeroAnimation();
+            }
         }
 
         gsap.utils.toArray('.section-title').forEach(title => {
             ScrollTrigger.create({
                 trigger: title,
                 start: "top 80%",
-                onEnter: () => { gsap.fromTo(title, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }); }
+                onEnter: () => { gsap.fromTo(title, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }); }
             });
         });
 
@@ -88,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ScrollTrigger.create({
                 trigger: box,
                 start: "top 80%",
-                onEnter: () => { gsap.fromTo(box, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, delay: index * 0.2 });}
+                onEnter: () => { gsap.fromTo(box, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: index * 0.15 });}
             });
         });
 
@@ -155,6 +188,109 @@ document.addEventListener('DOMContentLoaded', function() {
                 onEnter: () => { gsap.fromTo('.about-content', { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 });}
             });
         }
+    }
+
+    if (document.getElementById('tsparticles-background') && typeof tsParticles !== 'undefined') {
+        tsParticles.load("tsparticles-background", {
+            fpsLimit: 60,
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#ffffff"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 0.5,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 2,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 20,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                links: {
+                    enable: true,
+                    distance: 120,
+                    color: "#ffffff",
+                    opacity: 0.3,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1.5,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: false,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 200,
+                        line_linked: {
+                            opacity: 0.8
+                        }
+                    },
+                    bubble: {
+                        distance: 250,
+                        size: 20,
+                        duration: 2,
+                        opacity: 0.8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            detectRetina: true
+        }).then(container => {
+        }).catch(error => {
+        });
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

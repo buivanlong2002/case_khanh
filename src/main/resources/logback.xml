@@ -23,7 +23,7 @@
         <appender-ref ref="FILE" />
     </root>
 
-    <logger name="com.bachnt" level="DEBUG" additivity="false">
+    <logger name="com.devfromzk" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </logger>

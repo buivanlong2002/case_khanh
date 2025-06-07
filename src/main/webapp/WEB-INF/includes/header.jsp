@@ -12,10 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jKAXnDuv2sHwrsrNEbO3AQNHVnBEvShiX9cv3H0K2kLBHxM9HGERDtvMfaXuLwBwL_G_Eys2rC_XgYVJZ7b3_Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.10.1/tsparticles.bundle.min.js"></script>
+
     <script>
         const appContextPath = "${pageContext.request.contextPath}";
     </script>
@@ -26,17 +28,17 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="${pageContext.request.contextPath}/">
                     <span class="logo-text">
-                        <c:set var="profileName" value="${profile.name}"/>
-                        <c:if test="${not empty profileName}">
-                            <c:set var="nameParts" value="${fn:split(profileName, ' ')}" />
-                            <c:set var="firstNameInitial" value="${fn:substring(nameParts[0], 0, 1)}" />
-                            <c:set var="lastNameInitial" value="" />
-                            <c:if test="${fn:length(nameParts) > 1}">
-                                <c:set var="lastNameInitial" value="${fn:substring(nameParts[fn:length(nameParts)-1], 0, 1)}" />
+                        <c:set var="profileNameForLogo" value="${profile.name}"/>
+                        <c:if test="${not empty profileNameForLogo}">
+                            <c:set var="namePartsLogo" value="${fn:split(profileNameForLogo, ' ')}" />
+                            <c:set var="firstNameInitialLogo" value="${fn:substring(namePartsLogo[0], 0, 1)}" />
+                            <c:set var="lastNameInitialLogo" value="" />
+                            <c:if test="${fn:length(namePartsLogo) > 1}">
+                                <c:set var="lastNameInitialLogo" value="${fn:substring(namePartsLogo[fn:length(namePartsLogo)-1], 0, 1)}" />
                             </c:if>
-                            <c:out value="${firstNameInitial}${lastNameInitial}"/>
+                            <c:out value="${firstNameInitialLogo}${lastNameInitialLogo}"/>
                         </c:if>
-                        <c:if test="${empty profileName}">NTB</c:if>
+                        <c:if test="${empty profileNameForLogo}">NGK</c:if>
                     </span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,17 +85,17 @@
 <div id="preloader">
     <div class="preloader-content-centered">
         <div class="preloader-logo-text-bar">
-            <c:set var="profileName" value="${profile.name}"/>
-            <c:if test="${not empty profileName}">
-                <c:set var="nameParts" value="${fn:split(profileName, ' ')}" />
-                <c:set var="firstNameInitial" value="${fn:substring(nameParts[0], 0, 1)}" />
-                <c:set var="lastNameInitial" value="" />
-                <c:if test="${fn:length(nameParts) > 1}">
-                    <c:set var="lastNameInitial" value="${fn:substring(nameParts[fn:length(nameParts)-1], 0, 1)}" />
+            <c:set var="profileNameForPreloader" value="${profile.name}"/>
+            <c:if test="${not empty profileNameForPreloader}">
+                <c:set var="namePartsPreloader" value="${fn:split(profileNameForPreloader, ' ')}" />
+                <c:set var="firstNameInitialPreloader" value="${fn:substring(namePartsPreloader[0], 0, 1)}" />
+                <c:set var="lastNameInitialPreloader" value="" />
+                <c:if test="${fn:length(namePartsPreloader) > 1}">
+                    <c:set var="lastNameInitialPreloader" value="${fn:substring(namePartsPreloader[fn:length(namePartsPreloader)-1], 0, 1)}" />
                 </c:if>
-                <c:out value="${firstNameInitial}${lastNameInitial}"/>
+                <c:out value="${firstNameInitialPreloader}${lastNameInitialPreloader}"/>
             </c:if>
-            <c:if test="${empty profileName}">NTB</c:if>
+            <c:if test="${empty profileNameForPreloader}">NGK</c:if>
         </div>
         <div class="preloader-bar-container-simple">
             <div class="preloader-bar-simple"></div>

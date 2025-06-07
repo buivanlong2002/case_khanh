@@ -7,18 +7,29 @@
 
 <!-- Hero Section -->
 <section class="hero-area" id="home">
+    <div id="tsparticles-background"></div>
     <div class="container">
-        <div class="row align-items-center" style="min-height: 80vh;">
-            <div class="col-lg-8 col-md-10 mx-auto text-center text-lg-start">
-                <div class="hero-text">
-                    <h1 data-aos="fade-up" data-aos-delay="100"><c:out value="${profile.name}"/></h1>
-                    <p data-aos="fade-up" data-aos-delay="300" class="lead">
+        <div class="row align-items-center" style="min-height: 90vh; min-height: 90dvh;">
+            <div class="col-lg-10 col-md-12 mx-auto text-center">
+                <div class="hero-text-animated">
+                    <h1 class="animated-name">
+                        <span class="name-word word-ngo">
+                            <span class="char">N</span><span class="char">G</span><span class="char">Ô</span>
+                        </span>
+                        <span class="name-word word-gia">
+                            <span class="char">G</span><span class="char">I</span><span class="char">A</span>
+                        </span>
+                        <span class="name-word word-khanh">
+                            <span class="char">K</span><span class="char">H</span><span class="char">Á</span><span class="char">N</span><span class="char">H</span>
+                        </span>
+                    </h1>
+                    <p class="animated-subtitle lead">
                         <c:out value="${profile.position}"/>
                         <c:if test="${not empty profile.companyName}">
                             - <c:out value="${profile.companyName}"/>
                         </c:if>
                     </p>
-                    <div class="hero-btns" data-aos="fade-up" data-aos-delay="500">
+                    <div class="hero-btns">
                         <a href="#about" class="hero-btn">Tìm Hiểu Thêm</a>
                         <a href="${pageContext.request.contextPath}/contact" class="hero-btn outline">Liên Hệ Ngay</a>
                     </div>

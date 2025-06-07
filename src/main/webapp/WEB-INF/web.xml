@@ -38,7 +38,7 @@
 
     <filter>
         <filter-name>AdminAuthFilter</filter-name>
-        <filter-class>com.bachnt.web.filter.AdminAuthFilter</filter-class>
+        <filter-class>com.devfromzk.web.filter.AdminAuthFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AdminAuthFilter</filter-name>
@@ -76,7 +76,7 @@
 
     <servlet>
         <servlet-name>ImageServlet</servlet-name>
-        <servlet-class>com.bachnt.web.servlet.ImageServlet</servlet-class>
+        <servlet-class>com.devfromzk.web.servlet.ImageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ImageServlet</servlet-name>
