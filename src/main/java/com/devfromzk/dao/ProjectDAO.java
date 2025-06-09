@@ -29,7 +29,7 @@ public class ProjectDAO {
                 }
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return project;
     }
@@ -47,7 +47,7 @@ public class ProjectDAO {
                 projects.add(project);
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return projects;
     }
@@ -71,7 +71,7 @@ public class ProjectDAO {
 
             rowInserted = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowInserted;
     }
@@ -96,7 +96,7 @@ public class ProjectDAO {
 
             rowUpdated = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowUpdated;
     }
@@ -110,7 +110,7 @@ public class ProjectDAO {
             stmt.setInt(1, id);
             rowDeleted = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowDeleted;
     }
@@ -140,7 +140,7 @@ public class ProjectDAO {
                 count = rs.getInt(1);
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e); // Nên dùng logging
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e); // Nên dùng logging
         }
         return count;
     }

@@ -33,7 +33,7 @@ public class ContactMessageDAO {
             int rowsAffected = stmt.executeUpdate();
             success = (rowsAffected > 0);
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return success;
     }
@@ -51,7 +51,7 @@ public class ContactMessageDAO {
                 messages.add(message);
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return messages;
     }
@@ -70,7 +70,7 @@ public class ContactMessageDAO {
                 }
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return message;
     }
@@ -88,7 +88,7 @@ public class ContactMessageDAO {
             int rowsAffected = stmt.executeUpdate();
             success = (rowsAffected > 0);
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return success;
     }
@@ -102,7 +102,7 @@ public class ContactMessageDAO {
             stmt.setInt(1, id);
             rowDeleted = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowDeleted;
     }
@@ -129,7 +129,7 @@ public class ContactMessageDAO {
                 count = rs.getInt(1);
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return count;
     }

@@ -25,11 +25,5 @@
 <a href="${pageContext.request.contextPath}/" class="btn btn-primary">
     <i class="fas fa-home mr-2"></i>Về Trang Chủ
 </a>
-<!--
-    Thông tin debug (chỉ hiển thị khi phát triển, xóa hoặc ẩn khi deploy production):
-    <hr style="width:50%; margin-top:30px;">
-    <p><small>Request URI: ${pageContext.errorData.requestURI}</small></p>
-    <p><small>Servlet Name: ${pageContext.errorData.servletName}</small></p>
-    -->
 </body>
 </html>

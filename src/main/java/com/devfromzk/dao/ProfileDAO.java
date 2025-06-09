@@ -29,7 +29,7 @@ public class ProfileDAO {
                 }
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return profile;
     }
@@ -57,7 +57,7 @@ public class ProfileDAO {
 
             rowUpdated = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowUpdated;
     }
@@ -77,7 +77,7 @@ public class ProfileDAO {
                 }
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return skills;
     }
@@ -95,7 +95,7 @@ public class ProfileDAO {
 
             rowInserted = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowInserted;
     }
@@ -114,7 +114,7 @@ public class ProfileDAO {
 
             rowUpdated = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowUpdated;
     }
@@ -128,7 +128,7 @@ public class ProfileDAO {
             stmt.setInt(1, skillId);
             rowDeleted = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowDeleted;
     }

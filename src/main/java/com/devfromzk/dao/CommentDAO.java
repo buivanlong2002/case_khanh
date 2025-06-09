@@ -1,5 +1,4 @@
 package com.devfromzk.dao;
-
 import com.devfromzk.model.Comment;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,13 +8,11 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CommentDAO {
     private static final Logger logger = LoggerFactory.getLogger(CommentDAO.class);
-
     private Comment extractCommentFromResultSet(ResultSet rs) throws SQLException {
         Comment comment = new Comment();
         comment.setId(rs.getInt("id"));
@@ -28,7 +25,6 @@ public class CommentDAO {
         comment.setStatus(rs.getString("status"));
         return comment;
     }
-
     public List<Comment> getApprovedCommentsByPostId(int blogPostId) {
         List<Comment> comments = new ArrayList<>();
         String sql = "SELECT c.*, bp.title as blog_post_title FROM comments c JOIN blog_posts bp ON c.blog_post_id = bp.id WHERE c.blog_post_id = ? AND c.status = 'approved' ORDER BY c.created_date ASC";
@@ -37,16 +33,14 @@ public class CommentDAO {
             stmt.setInt(1, blogPostId);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    // Không cần lấy blog_post_title vào model Comment ở đây, nhưng query có thể hữu ích nếu muốn join
                     comments.add(extractCommentFromResultSet(rs));
                 }
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+            logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return comments;
     }
-
     public boolean saveComment(Comment comment) {
         String sql = "INSERT INTO comments (blog_post_id, parent_comment_id, author_name, author_email, content, created_date, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
         boolean rowInserted = false;
@@ -73,33 +67,25 @@ public class CommentDAO {
                 }
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+            logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowInserted;
     }
-
-    // HÀM MỚI CHO ADMIN
-    public List<Comment> getAllCommentsAdmin() { // Có thể thêm filter/phân trang sau
+    public List<Comment> getAllCommentsAdmin() {
         List<Comment> comments = new ArrayList<>();
-        // JOIN với blog_posts để lấy tiêu đề bài viết cho dễ quản lý
         String sql = "SELECT c.*, bp.title as blog_post_title FROM comments c LEFT JOIN blog_posts bp ON c.blog_post_id = bp.id ORDER BY c.created_date DESC";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Comment comment = extractCommentFromResultSet(rs);
-                // Bạn có thể tạo một DTO hoặc thêm trường tạm thời vào Comment model để chứa blog_post_title
-                // Hoặc xử lý ở Servlet nếu cần hiển thị tên bài viết
-                // Ví dụ: comment.setBlogPostTitle(rs.getString("blog_post_title"));
                 comments.add(comment);
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+            logger.error("Lỗi SQL khi thực hiện getALlcomment {}", e.getMessage(), e);
         }
         return comments;
     }
-
-    // HÀM MỚI CHO ADMIN
     public Comment getCommentById(int commentId) {
         Comment comment = null;
         String sql = "SELECT * FROM comments WHERE id = ?";
@@ -112,12 +98,10 @@ public class CommentDAO {
                 }
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+            logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return comment;
     }
-
-    // HÀM MỚI CHO ADMIN
     public boolean updateCommentStatus(int commentId, String newStatus) {
         String sql = "UPDATE comments SET status = ? WHERE id = ?";
         boolean rowUpdated = false;
@@ -127,12 +111,10 @@ public class CommentDAO {
             stmt.setInt(2, commentId);
             rowUpdated = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+            logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowUpdated;
     }
-
-    // HÀM MỚI CHO ADMIN (Nếu cho phép sửa nội dung)
     public boolean updateCommentContent(int commentId, String newContent) {
         String sql = "UPDATE comments SET content = ? WHERE id = ?";
         boolean rowUpdated = false;
@@ -142,22 +124,19 @@ public class CommentDAO {
             stmt.setInt(2, commentId);
             rowUpdated = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+            logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowUpdated;
     }
-
-    // HÀM MỚI CHO ADMIN
     public boolean deleteComment(int commentId) {
         String sql = "DELETE FROM comments WHERE id = ?";
         boolean rowDeleted = false;
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, commentId);
-            // Cũng nên xóa các comment con nếu có, hoặc CSDL tự xử lý qua FOREIGN KEY ON DELETE CASCADE
             rowDeleted = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+            logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowDeleted;
     }

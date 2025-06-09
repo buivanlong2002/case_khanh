@@ -25,19 +25,5 @@
 <a href="${pageContext.request.contextPath}/" class="btn btn-primary">
     <i class="fas fa-home mr-2"></i>Về Trang Chủ
 </a>
-<!--
-    Thông tin debug (chỉ hiển thị khi phát triển, xóa hoặc ẩn khi deploy production):
-    <hr style="width:50%; margin-top:30px;">
-    <p><small>Request URI: ${pageContext.errorData.requestURI}</small></p>
-    <p><small>Servlet Name: ${pageContext.errorData.servletName}</small></p>
-    <p><small>Status Code: ${pageContext.errorData.statusCode}</small></p>
-    <p><small>Exception: ${pageContext.exception}</small></p>
-    <p><small>Exception Message: ${pageContext.exception.message}</small></p>
-    <h4>Stack Trace (chỉ cho dev):</h4>
-    <pre style="text-align: left; font-size: 12px; max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background: #fff;">
-    <c:forEach var="trace" items="${pageContext.exception.stackTrace}">    ${trace}
-    </c:forEach>
-    </pre>
-    -->
 </body>
 </html>

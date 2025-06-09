@@ -36,7 +36,7 @@ public class TestimonialDAO {
                 testimonials.add(extractTestimonialFromResultSet(rs));
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return testimonials;
     }
@@ -52,7 +52,7 @@ public class TestimonialDAO {
                 testimonials.add(extractTestimonialFromResultSet(rs));
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return testimonials;
     }
@@ -70,7 +70,7 @@ public class TestimonialDAO {
                 }
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return testimonial;
     }
@@ -88,7 +88,7 @@ public class TestimonialDAO {
             stmt.setInt(5, testimonial.getDisplayOrder());
             rowInserted = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowInserted;
     }
@@ -107,7 +107,7 @@ public class TestimonialDAO {
             stmt.setInt(6, testimonial.getId());
             rowUpdated = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowUpdated;
     }
@@ -121,7 +121,7 @@ public class TestimonialDAO {
             stmt.setInt(1, testimonialId);
             rowDeleted = stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return rowDeleted;
     }

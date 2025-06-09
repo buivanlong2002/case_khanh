@@ -30,7 +30,7 @@ public class UserDAO {
                 }
             }
         } catch (SQLException e) {
-                logger.error("Lỗi SQL khi thực hiện [tên_hàm/mô_tả_ngắn_gọn]: {}", e.getMessage(), e);
+                logger.error("Lỗi SQL khi thực hiện : {}", e.getMessage(), e);
         }
         return user;
     }

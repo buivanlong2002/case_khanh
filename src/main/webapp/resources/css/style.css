@@ -1,30 +1,29 @@
-/* ===================================================================
-    Global Styles
-=================================================================== */
 :root {
-    --primary-color: #1A2E3D; /* Xanh Navy Đậm / Deep Indigo */
-    --secondary-color: #4FC3F7; /* Xanh Dương Sáng / Light Blue */
-    --accent-color: #FF7043; /* Cam San Hô / Deep Orange (Coral-like) */
-    --light-color: #E0E0E0; /* Xám Rất Nhạt / Light Grey */
-    --dark-color: #263238; /* Xám Đen / Blue Grey Darken-3 */
-    --text-color: #424242; /* Xám Đậm cho Chữ / Dark Grey Text */
-    --text-color-light: #FAFAFA; /* Trắng Ngà cho chữ trên nền tối */
-    --body-bg: #FFFFFF; /* Trắng */
-    --section-bg-light: #F5F5F5; /* Trắng Xám / Off-white Grey */
-    --border-color: #BDBDBD; /* Xám Nhạt cho Viền / Medium Grey Border */
-
+    --primary-color: #1A2E3D;
+    --secondary-color: #4FC3F7;
+    --accent-color: #FF7043;
+    --light-color: #E0E0E0;
+    --dark-color: #263238;
+    --text-color: #424242;
+    --text-color-light: #FAFAFA;
+    --body-bg: #FFFFFF;
+    --section-bg-light: #F5F5F5;
+    --border-color: #BDBDBD;
     --heading-font: 'Montserrat', sans-serif;
     --body-font: 'Montserrat', sans-serif;
     --transition-speed: 0.3s;
     --border-radius: 0.375rem;
-    --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* Giảm độ đậm của bóng đổ một chút */
+    --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     --box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.06);
+    --preloader-bg-bar: #ffffff;
+    --bar-logo-text-color: var(--primary-color, #2c3e50);
+    --bar-background-color: rgba(0, 0, 0, 0.1);
+    --bar-fill-color: var(--secondary-color, #3498db);
 }
 
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-    /* Base font size */
 }
 
 body {
@@ -40,7 +39,9 @@ body {
 a {
     color: var(--secondary-color);
     text-decoration: none;
-    transition: all var(--transition-speed) ease;
+    transition-property: color, background-color, border-color, opacity, transform;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 a:hover {
@@ -94,17 +95,6 @@ p {
     color: var(--accent-color) !important;
 }
 
-
-/* ===================================================================
-    Simple Bar Preloader
-=================================================================== */
-:root {
-    --preloader-bg-bar: #ffffff;
-    --bar-logo-text-color: var(--primary-color, #2c3e50);
-    --bar-background-color: rgba(0, 0, 0, 0.1);
-    --bar-fill-color: var(--secondary-color, #3498db);
-}
-
 #preloader {
     position: fixed;
     top: 0;
@@ -147,7 +137,7 @@ p {
     background-color: var(--bar-background-color);
     border-radius: 3px;
     overflow: hidden;
-    margin: 0 auto; /* Căn giữa nếu .preloader-content-centered không display:flex */
+    margin: 0 auto;
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.4s ease-out, transform 0.4s ease-out;
@@ -159,32 +149,36 @@ p {
     background-color: var(--bar-fill-color);
     border-radius: 3px;
     animation: simpleBarAnimation 1.5s infinite linear;
-    /* Hoặc dùng transition nếu bạn muốn kiểm soát tiến trình bằng JS */
-    /* transition: width 0.3s linear; */
 }
 
 @keyframes simpleBarAnimation {
-    0% { width: 0%; }
-    50% { width: 100%; }
-    100% { width: 0%; } /* Lặp lại */
+    0% {
+        width: 0%;
+    }
+
+    50% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0%;
+    }
 }
 
-
-/* Khi ẩn preloader */
 #preloader.hiding .preloader-logo-text-bar,
 #preloader.hiding .preloader-bar-container-simple {
     opacity: 0;
     transform: translateY(20px);
 }
-/* ===================================================================
-    Header Area
-=================================================================== */
+
 .header-area {
     padding: 15px 0;
     position: fixed;
     width: 100%;
     z-index: 1030;
-    transition: all var(--transition-speed) ease;
+    transition-property: padding, background-color, box-shadow;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
     background-color: rgba(255, 255, 255, 0.9);
 }
 
@@ -227,7 +221,9 @@ p {
     bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
-    transition: all var(--transition-speed) ease;
+    transition-property: width;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 .navbar-nav .nav-link:hover,
@@ -261,7 +257,9 @@ p {
     width: 100%;
     height: 2px;
     background-color: var(--primary-color);
-    transition: all 0.3s ease;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
 }
 
 .navbar-toggler-icon::before {
@@ -272,9 +270,6 @@ p {
     bottom: 25%;
 }
 
-/* ===================================================================
-    Hero Area
-=================================================================== */
 .hero-area {
     background-color: var(--primary-color);
     color: var(--text-color-light);
@@ -294,7 +289,9 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Đặt dưới nội dung của hero-text */
+    z-index: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .hero-area .container {
@@ -315,6 +312,12 @@ p {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     text-transform: uppercase;
     font-size: 0.9rem;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    transition-property: transform, box-shadow, background-color, border-color, color;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 .hero-btn.outline {
@@ -345,6 +348,7 @@ p {
     animation: bounce 2s infinite;
     color: #fff;
     font-size: 24px;
+    z-index: 2;
 }
 
 @keyframes bounce {
@@ -366,121 +370,54 @@ p {
     }
 }
 
-/* ===================================================================
-    Animated Hero Text
-=================================================================== */
 .hero-text-animated {
-    position: relative; /* Cần cho một số hiệu ứng GSAP nếu có định vị tuyệt đối */
+    position: relative;
+    z-index: 2;
 }
 
 .animated-name {
-    font-size: 4rem; /* Kích thước chữ lớn, có thể điều chỉnh */
+    font-size: 4rem;
     font-weight: 700;
     color: #fff;
     margin-bottom: 25px;
     line-height: 1.2;
-    text-transform: uppercase; /* Để đồng nhất */
-    letter-spacing: 2px; /* Giãn cách ký tự một chút */
-    overflow: hidden; /* Để các ký tự không bị lộ ra ngoài khi animate từ ngoài vào */
-    padding: 10px 0; /* Thêm padding để tránh bị cắt khi transform */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    overflow: hidden;
+    padding: 10px 0;
 }
 
 .animated-name .name-word {
-    display: inline-block; /* Cho phép margin/padding */
-    margin-right: 0.5em; /* Khoảng cách giữa các từ */
-    white-space: nowrap; /* Giữ các ký tự trên cùng một dòng trong từ */
+    display: inline-block;
+    margin-right: 0.5em;
+    white-space: nowrap;
 }
+
 .animated-name .name-word:last-child {
     margin-right: 0;
 }
 
 .animated-name .char {
-    display: inline-block; /* Quan trọng để GSAP có thể transform từng ký tự */
-    opacity: 0; /* Ban đầu ẩn đi */
-    transform: translateY(100%) rotateZ(15deg); /* Vị trí ban đầu của ký tự: ở dưới và nghiêng */
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%) rotateZ(15deg);
     transform-origin: bottom left;
-    min-width: 0.3em; /* Đảm bảo ký tự có chiều rộng tối thiểu, tránh lỗi hiển thị */
+    min-width: 0.3em;
 }
 
 .animated-subtitle {
     font-size: 1.4rem;
     margin-bottom: 35px;
     color: rgba(255, 255, 255, 0.85);
-    opacity: 0; /* Ban đầu ẩn */
-    transform: translateY(30px); /* Vị trí ban đầu của subtitle */
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .hero-text-animated .hero-btns {
-    opacity: 0; /* Ban đầu ẩn */
-    transform: translateY(30px); /* Vị trí ban đầu của buttons */
+    opacity: 0;
+    transform: translateY(30px);
 }
 
-/* Điều chỉnh kích thước chữ cho màn hình nhỏ hơn */
-@media (max-width: 991.98px) {
-    .animated-name {
-        font-size: 3rem;
-    }
-    .animated-subtitle {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .animated-name {
-        font-size: 2.2rem; /* Giảm kích thước chữ cho mobile */
-        letter-spacing: 1px;
-    }
-    .animated-name .name-word {
-        margin-right: 0.3em;
-    }
-    .animated-subtitle {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .animated-name {
-        font-size: 1.8rem;
-    }
-}
-
-/* Background Hero Area hiện tại của bạn */
-.hero-area {
-    background-image: linear-gradient(135deg, rgba(44, 62, 80, 0.85), rgba(52, 152, 219, 0.75)), url('../images/hero-bg.gif');
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    color: var(--text-color-light);
-    min-height: 90vh; /* Đã có */
-    min-height: 90dvh; /* Thêm dvh */
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-top: 80px; /* Giảm padding top một chút vì header có thể đã chiếm không gian */
-    padding-bottom: 40px;
-}
-
-/* Scroll down button */
-.scroll-down {
-    /* CSS hiện tại của bạn cho scroll-down */
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: bounce 2s infinite;
-    color: #fff;
-    font-size: 24px;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-    40% { transform: translate(-50%, -15px); }
-    60% { transform: translate(-50%, -7px); }
-}
-
-/* ===================================================================
-    Section Title
-=================================================================== */
 .section-title {
     margin-bottom: 60px;
 }
@@ -523,25 +460,33 @@ p {
     margin-left: 0;
 }
 
+.about-area .row.align-items-center>.col-lg-5 {
+    display: flex;
+    align-self: stretch;
+}
 
-/* ===================================================================
-    About Area (Preview on Home, Detail on About Page)
-=================================================================== */
 .about-img {
     position: relative;
-    padding: 10px;
+    padding: 0;
     border: 3px solid var(--secondary-color);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
+    width: 100%;
+    max-height: 480px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .about-img img {
-    border-radius: calc(var(--border-radius) - 3px);
-    /* Inner radius */
     display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 0;
 }
-
-/* .about-img::before { ... } // Optional decorative element */
 
 .about-content h3 {
     font-size: 1.8rem;
@@ -564,37 +509,15 @@ p {
     margin-right: 8px;
 }
 
-.about-detail-img {
-    /* For about.jsp */
-    padding: 15px;
-    border: 5px solid var(--secondary-color);
-    border-radius: 10px;
-}
-
-.about-detail-content .about-info-list .info-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.about-detail-content .about-info-list .info-item i {
-    font-size: 1.2rem;
-    margin-right: 15px;
-    width: 20px;
-    text-align: center;
-}
-
-
-/* ===================================================================
-    Features Area / Services
-=================================================================== */
 .feature-box {
     background-color: #fff;
     padding: 35px 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-sm);
     text-align: center;
-    transition: all var(--transition-speed) ease;
+    transition-property: transform, box-shadow, border-top-color;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
     margin-bottom: 30px;
     border-top: 3px solid transparent;
     height: 100%;
@@ -613,12 +536,17 @@ p {
     background-color: rgba(52, 152, 219, 0.1);
     border-radius: 50%;
     margin: 0 auto 20px;
-    transition: all var(--transition-speed) ease;
+    transition-property: background-color;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 .feature-icon i {
     color: var(--secondary-color);
     font-size: 30px;
+    transition-property: color;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 .feature-box:hover .feature-icon {
@@ -640,9 +568,6 @@ p {
     line-height: 1.6;
 }
 
-/* ===================================================================
-    Page Banner (for inner pages like About, Blog, etc.)
-=================================================================== */
 .page-banner {
     padding: 120px 0 20px;
     background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('../images/page-banner-bg.jpg') center center/cover no-repeat;
@@ -689,10 +614,6 @@ p {
     color: rgba(255, 255, 255, 0.5);
 }
 
-
-/* ===================================================================
-    Skills Area
-=================================================================== */
 .skills-area .skill-bar {
     margin-bottom: 30px;
 }
@@ -723,12 +644,8 @@ p {
     height: 100%;
     background-color: var(--secondary-color);
     border-radius: 4px;
-    transition: width 1.5s ease-in-out;
 }
 
-/* ===================================================================
-    Timeline Section (Experience, Education)
-=================================================================== */
 .timeline-group-title {
     font-size: 1.5rem;
     margin-bottom: 30px;
@@ -740,7 +657,6 @@ p {
     padding-left: 30px;
 }
 
-/* Adjust for left alignment */
 .timeline::before {
     content: '';
     position: absolute;
@@ -748,7 +664,6 @@ p {
     width: 2px;
     background: var(--border-color);
     left: 0;
-    /* Align line to the left */
     top: 0;
 }
 
@@ -758,11 +673,9 @@ p {
 }
 
 .timeline-item::before {
-    /* The dot on the line */
     content: '';
     position: absolute;
     left: -6px;
-    /* Position dot on the line */
     top: 5px;
     width: 12px;
     height: 12px;
@@ -798,10 +711,6 @@ p {
     margin-bottom: 0;
 }
 
-
-/* ===================================================================
-    Testimonials Area
-=================================================================== */
 .testimonial-item {
     background-color: #fff;
     padding: 30px;
@@ -852,32 +761,43 @@ p {
     margin: 0;
 }
 
-
-/* ===================================================================
-    Blog Area (List and Single Post)
-=================================================================== */
-.blog-post-item {
+.blog-post-item,
+.blog-post-preview {
     background: #fff;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-sm);
     margin-bottom: 30px;
     overflow: hidden;
-    transition: all var(--transition-speed) ease;
+    transition-property: transform, box-shadow;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
+    display: flex;
+    flex-direction: column;
 }
 
-.blog-post-item:hover {
+.blog-post-item:hover,
+.blog-post-preview:hover {
     box-shadow: var(--box-shadow);
     transform: translateY(-5px);
 }
 
-.blog-post-img img {
+.blog-post-img img,
+.blog-post-preview .blog-img img {
     width: 100%;
     height: 250px;
     object-fit: cover;
-    transition: transform var(--transition-speed) ease;
+    transition-property: transform;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
+    display: block;
 }
 
-.blog-post-item:hover .blog-post-img img {
+.blog-post-preview .blog-img img {
+    height: 200px;
+}
+
+.blog-post-item:hover .blog-post-img img,
+.blog-post-preview:hover .blog-img img {
     transform: scale(1.05);
 }
 
@@ -885,17 +805,36 @@ p {
     padding: 25px;
 }
 
-.blog-post-meta {
+.blog-post-preview .blog-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.blog-post-meta,
+.blog-post-preview .blog-meta {
     margin-bottom: 15px;
     font-size: 0.85rem;
     color: #777;
 }
 
-.blog-post-meta span {
+.blog-post-preview .blog-meta {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.blog-post-meta span,
+.blog-post-preview .blog-meta span {
     margin-right: 15px;
 }
 
-.blog-post-meta span i {
+.blog-post-preview .blog-meta span {
+    margin-right: 10px;
+}
+
+.blog-post-meta span i,
+.blog-post-preview .blog-meta span i {
     margin-right: 5px;
     color: var(--secondary-color);
 }
@@ -913,11 +852,20 @@ p {
     margin-bottom: 15px;
 }
 
-.blog-post-title a {
+.blog-post-preview .blog-content h4 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.blog-post-title a,
+.blog-post-preview .blog-content h4 a {
     color: var(--primary-color);
 }
 
-.blog-post-title a:hover {
+.blog-post-title a:hover,
+.blog-post-preview .blog-content h4 a:hover {
     color: var(--secondary-color);
 }
 
@@ -926,12 +874,28 @@ p {
     font-size: 0.95rem;
 }
 
+.blog-post-preview .blog-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    min-height: calc(1.6em * 3);
+}
+
 .read-more-btn,
 .btn-primary {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
     color: #fff;
     padding: 0.5rem 1rem;
+    transition-property: background-color, border-color;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 .btn-primary:hover {
@@ -939,8 +903,27 @@ p {
     border-color: var(--primary-color);
 }
 
+.blog-post-preview .read-more-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+    margin-top: auto;
+    align-self: flex-start;
+}
 
-/* Blog Sidebar */
+.blog-post-preview .read-more-link:hover {
+    color: var(--primary-color);
+}
+
+.blog-post-preview .read-more-link i {
+    margin-left: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.blog-post-preview .read-more-link:hover i {
+    transform: translateX(4px);
+}
+
 .blog-sidebar .sidebar-widget {
     background: #fff;
     padding: 25px;
@@ -1007,6 +990,9 @@ p {
     border-radius: 50%;
     margin: 0 5px;
     font-size: 0.9rem;
+    transition-property: background-color, color;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 .author-widget .social-icons a:hover {
@@ -1098,6 +1084,9 @@ p {
     border-radius: 30px;
     font-size: 0.85rem;
     text-transform: capitalize;
+    transition-property: background-color, color;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 .tags-widget .tagcloud a:hover {
@@ -1105,7 +1094,6 @@ p {
     color: #fff;
 }
 
-/* Blog Post Full (Single Post) */
 .blog-post-full-img {
     margin-bottom: 30px;
     border-radius: var(--border-radius);
@@ -1218,7 +1206,6 @@ p {
     color: var(--primary-color);
 }
 
-/* Comments Area */
 .comments-area {
     margin-top: 50px;
 }
@@ -1273,10 +1260,6 @@ p {
     margin-bottom: 1.5rem;
 }
 
-
-/* ===================================================================
-    Projects Area
-=================================================================== */
 .project-filter-bar {
     margin-bottom: 40px;
 }
@@ -1300,7 +1283,9 @@ p {
     color: var(--primary-color);
     border-radius: 30px;
     border: 1px solid transparent;
-    transition: all var(--transition-speed) ease;
+    transition-property: background-color, color, border-color;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
     display: block;
 }
 
@@ -1311,43 +1296,56 @@ p {
     border-color: var(--secondary-color);
 }
 
-.project-item {
+.project-item,
+.project-item-preview {
     background: #fff;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-sm);
     margin-bottom: 30px;
-    /* For .project-card-wrapper in projects.jsp */
     overflow: hidden;
-    transition: all var(--transition-speed) ease;
+    transition-property: transform, box-shadow;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
     height: 100%;
-    /* For equal height cards */
     display: flex;
     flex-direction: column;
 }
 
-.project-item:hover {
+.project-item:hover,
+.project-item-preview:hover {
     box-shadow: var(--box-shadow);
     transform: translateY(-5px);
 }
 
-.project-img {
+.project-img,
+.project-item-preview .project-img {
     position: relative;
     overflow: hidden;
 }
 
-.project-img img {
+.project-img img,
+.project-item-preview .project-img img {
     width: 100%;
     height: 250px;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition-property: transform;
+    transition-duration: 0.5s;
+    /* Specific duration for this transform */
+    transition-timing-function: ease;
     display: block;
 }
 
-.project-item:hover .project-img img {
+.project-item-preview .project-img img {
+    height: 200px;
+}
+
+.project-item:hover .project-img img,
+.project-item-preview:hover .project-img img {
     transform: scale(1.1);
 }
 
-.project-overlay {
+.project-overlay,
+.project-item-preview .project-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -1358,26 +1356,32 @@ p {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity var(--transition-speed) ease;
+    transition-property: opacity;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
-.project-item:hover .project-overlay {
+.project-item:hover .project-overlay,
+.project-item-preview:hover .project-overlay {
     opacity: 1;
 }
 
-.project-overlay-icon i {
+.project-overlay-icon i,
+.project-item-preview .project-overlay a {
     color: #fff;
     font-size: 30px;
 }
 
-.project-content {
+.project-content,
+.project-item-preview .project-content {
     padding: 20px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-.project-category {
+.project-category,
+.project-item-preview .project-category {
     font-size: 0.85rem;
     color: var(--secondary-color);
     font-weight: 600;
@@ -1386,16 +1390,30 @@ p {
     text-transform: uppercase;
 }
 
+.project-item-preview .project-category {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
 .project-title {
     font-size: 1.3rem;
     margin-bottom: 10px;
 }
 
-.project-title a {
+.project-item-preview .project-content h4 {
+    font-size: 1.15rem;
+    margin-bottom: 0;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.project-title a,
+.project-item-preview .project-content h4 a {
     color: var(--primary-color);
 }
 
-.project-title a:hover {
+.project-title a:hover,
+.project-item-preview .project-content h4 a:hover {
     color: var(--secondary-color);
 }
 
@@ -1434,22 +1452,16 @@ p {
     background-color: #f39c12;
 }
 
-/* Orange */
 .status-hoàn-thành,
 .status-hoan-thanh {
     background-color: #2ecc71;
 }
 
-/* Green */
 .status-tạm-dừng,
 .status-tam-dung {
     background-color: #e74c3c;
 }
 
-/* Red */
-
-
-/* Project Detail */
 .project-main-image {
     margin-bottom: 30px;
     border-radius: var(--border-radius);
@@ -1542,7 +1554,6 @@ p {
 .project-description-full ul li::before,
 .project-key-features ul li::before {
     content: "\f00c";
-    /* FontAwesome check icon */
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
@@ -1588,7 +1599,6 @@ p {
     background: #0077b5;
 }
 
-/* Project Sidebar */
 .project-sidebar .sidebar-widget {
     background: #fff;
     padding: 25px;
@@ -1647,7 +1657,6 @@ p {
     flex-grow: 1;
 }
 
-/* Make text wrap */
 .project-status-sidebar {
     font-weight: bold;
 }
@@ -1702,10 +1711,6 @@ p {
     color: #777;
 }
 
-
-/* ===================================================================
-    Contact Page
-=================================================================== */
 .contact-info-area .contact-info-box {
     background-color: #fff;
     border-radius: var(--border-radius);
@@ -1713,7 +1718,9 @@ p {
     text-align: center;
     height: 100%;
     box-shadow: var(--box-shadow-sm);
-    transition: all var(--transition-speed) ease;
+    transition-property: transform, box-shadow;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 .contact-info-area .contact-info-box:hover {
@@ -1837,10 +1844,6 @@ p {
     font-size: 1.05rem;
 }
 
-
-/* ===================================================================
-    Contact CTA (Call To Action)
-=================================================================== */
 .contact-cta {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     padding: 70px 0;
@@ -1877,15 +1880,10 @@ p {
     border-color: var(--light-color);
 }
 
-
-/* ===================================================================
-    Footer Area
-=================================================================== */
 .footer-area {
     background-color: var(--dark-color);
     padding-top: 70px;
     color: #adb5bd;
-    /* Lighter text for dark background */
 }
 
 .footer-widget {
@@ -1916,6 +1914,9 @@ p {
     color: #fff;
     margin-right: 10px;
     font-size: 1rem;
+    transition-property: background-color;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
 }
 
 .footer-social-icon a:hover {
@@ -1984,7 +1985,6 @@ p {
 
 .copyright-area {
     background-color: #1c2833;
-    /* Even darker */
     padding: 20px 0;
     margin-top: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -1996,17 +1996,34 @@ p {
     color: #869099;
 }
 
+.about-area,
+.features-area,
+.projects-preview-area,
+.blog-preview-area,
+.contact-cta,
+.section-padding,
+.page-banner,
+.skills-area,
+.comments-area,
+.project-filter-bar,
+.project-main-content,
+.project-sidebar,
+.contact-info-area,
+.contact-form-wrapper,
+.contact-map-wrapper,
+.business-hours-section,
+.footer-area {
+    position: relative;
+    z-index: 5;
+}
 
-/* ===================================================================
-    Responsive Styles (Basic examples, expand as needed)
-=================================================================== */
 @media (max-width: 991.98px) {
-    .hero-text h1 {
-        font-size: 2.8rem;
+    .animated-name {
+        font-size: 3rem;
     }
 
-    .hero-text p.lead {
-        font-size: 1.1rem;
+    .animated-subtitle {
+        font-size: 1.2rem;
     }
 
     .section-title h2 {
@@ -2021,35 +2038,41 @@ p {
         padding: 0.8rem 1rem !important;
     }
 
-    /* For mobile menu */
     .header-area {
         padding: 10px 0;
         background-color: #fff;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
     }
 
-    /* Ensure header is visible on mobile */
     .timeline {
         padding-left: 0;
     }
 
-    /* Adjust timeline for smaller screens */
     .timeline::before {
         left: 10px;
-    }
-
-    .timeline-item::before {
-        left: 4px;
     }
 
     .timeline-item {
         padding-left: 30px;
     }
+
+    .timeline-item::before {
+        left: 4px;
+    }
 }
 
 @media (max-width: 767.98px) {
-    .hero-text h1 {
+    .animated-name {
         font-size: 2.2rem;
+        letter-spacing: 1px;
+    }
+
+    .animated-name .name-word {
+        margin-right: 0.3em;
+    }
+
+    .animated-subtitle {
+        font-size: 1.1rem;
     }
 
     .section-padding {
@@ -2091,216 +2114,16 @@ p {
     }
 }
 
+@media (max-width: 480px) {
+    .animated-name {
+        font-size: 1.8rem;
+    }
+}
+
 .btn .badge {
     position: absolute;
     top: -5px;
     right: -5px;
     padding: 0.3em 0.5em;
-    /* Điều chỉnh padding */
     font-size: 0.7em;
-    /* Điều chỉnh font size */
-}
-
-.blog-post-preview {
-    background: #fff;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-sm);
-    overflow: hidden;
-    transition: all var(--transition-speed) ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.blog-post-preview:hover {
-    box-shadow: var(--box-shadow);
-    transform: translateY(-5px);
-}
-
-.blog-post-preview .blog-img {
-    position: relative;
-    /* Cần thiết cho một số hiệu ứng overlay nếu có sau này */
-}
-
-.blog-post-preview .blog-img img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    /* Loại bỏ khoảng trắng thừa dưới ảnh */
-    transition: transform var(--transition-speed) ease;
-}
-
-.blog-post-preview:hover .blog-img img {
-    transform: scale(1.05);
-}
-
-.blog-post-preview .blog-content {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    /* Cho phép phần content này dãn ra */
-}
-
-.blog-post-preview .blog-meta {
-    margin-bottom: 10px;
-    font-size: 0.8rem;
-    color: #777;
-}
-
-.blog-post-preview .blog-meta span {
-    margin-right: 10px;
-}
-
-.blog-post-preview .blog-meta span i {
-    margin-right: 5px;
-    color: var(--secondary-color);
-}
-
-.blog-post-preview .blog-content h4 {
-    font-size: 1.15rem;
-    margin-bottom: 10px;
-    line-height: 1.4;
-    font-weight: 600;
-}
-
-.blog-post-preview .blog-content h4 a {
-    color: var(--primary-color);
-}
-
-.blog-post-preview .blog-content h4 a:hover {
-    color: var(--secondary-color);
-}
-
-.blog-post-preview .blog-content p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: var(--text-color);
-
-    /* Giới hạn số dòng cho summary */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    /* Hiển thị tối đa 3 dòng */
-    -webkit-box-orient: vertical;
-    min-height: calc(1.6em * 3);
-    /* Đảm bảo chiều cao tối thiểu cho 3 dòng */
-}
-
-.blog-post-preview .read-more-link {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--secondary-color);
-    margin-top: auto;
-    /* Quan trọng: Đẩy nút "Đọc thêm" xuống dưới cùng */
-    align-self: flex-start;
-    /* Để nó không chiếm toàn bộ chiều rộng */
-}
-
-.blog-post-preview .read-more-link:hover {
-    color: var(--primary-color);
-}
-
-.blog-post-preview .read-more-link i {
-    margin-left: 5px;
-    transition: transform 0.2s ease-in-out;
-}
-
-.blog-post-preview .read-more-link:hover i {
-    transform: translateX(4px);
-}
-
-/* Styling for Project Preview Items on Homepage */
-.project-item-preview {
-    background: #fff;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-sm);
-    overflow: hidden;
-    transition: all var(--transition-speed) ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.project-item-preview:hover {
-    box-shadow: var(--box-shadow);
-    transform: translateY(-5px);
-}
-
-.project-item-preview .project-img {
-    position: relative;
-    overflow: hidden;
-    /* Quan trọng để giữ overlay và hiệu ứng ảnh */
-}
-
-.project-item-preview .project-img img {
-    width: 100%;
-    height: 200px;
-    /* Chiều cao cố định cho ảnh preview dự án */
-    object-fit: cover;
-    display: block;
-    transition: transform var(--transition-speed) ease;
-}
-
-.project-item-preview:hover .project-img img {
-    transform: scale(1.1);
-}
-
-.project-item-preview .project-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(52, 152, 219, 0.7);
-    /* Màu overlay như trong style gốc của bạn */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity var(--transition-speed) ease;
-}
-
-.project-item-preview:hover .project-overlay {
-    opacity: 1;
-}
-
-.project-item-preview .project-overlay a {
-    color: #fff;
-    font-size: 30px;
-}
-
-.project-item-preview .project-content {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    /* Cho phép phần content này dãn ra */
-    /* Không cần margin-top: auto vì không có phần tử nào cần đẩy xuống dưới trong preview này */
-}
-
-.project-item-preview .project-category {
-    font-size: 0.8rem;
-    color: var(--secondary-color);
-    font-weight: 600;
-    margin-bottom: 5px;
-    display: block;
-    text-transform: uppercase;
-}
-
-.project-item-preview .project-content h4 {
-    font-size: 1.15rem;
-    margin-bottom: 0;
-    /* Loại bỏ margin dưới nếu chỉ có tiêu đề */
-    line-height: 1.4;
-    font-weight: 600;
-}
-
-.project-item-preview .project-content h4 a {
-    color: var(--primary-color);
-}
-
-.project-item-preview .project-content h4 a:hover {
-    color: var(--secondary-color);
 }
