@@ -1,4 +1,5 @@
 :root {
+    --secondary-color-rgb: 79, 195, 247;
     --primary-color: #1A2E3D;
     --secondary-color: #4FC3F7;
     --accent-color: #FF7043;
@@ -2127,3 +2128,29 @@ p {
     padding: 0.3em 0.5em;
     font-size: 0.7em;
 }
+
+.about-detail-content .about-info-list .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.about-detail-content .about-info-list .info-item i {
+    margin-right: 15px;
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+.about-detail-content .about-info-list .info-item > div {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+.about-detail-content .about-info-list .info-item > div strong {
+    margin-right: 5px;
+    white-space: nowrap;
+}
+.about-detail-content .about-info-list .info-item > div a {
+    word-break: break-all;
+}
+
