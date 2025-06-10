@@ -25,7 +25,6 @@ public class AdminDashboardServlet extends HttpServlet {
     private ProjectDAO projectDAO;
     private ContactMessageDAO contactMessageDAO;
 
-
     @Override
     public void init() throws ServletException {
         profileDAO = new ProfileDAO();

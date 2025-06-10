@@ -1,52 +1,70 @@
-
 plugins {
     id 'java'
     id 'war'
 }
 
-group 'com'
-version '1.0-SNAPSHOT'
+group = 'com'
+version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-// Cấu hình để tải jetty-runner.jar
+// Jetty Runner cấu hình riêng
 configurations {
     jettyRunnerLibs
 }
 
 dependencies {
+    // Servlet & JSP API (chỉ dùng lúc build)
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
     providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+
+    // JSTL
     implementation 'javax.servlet:jstl:1.2'
 
+    // JDBC drivers
     implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'org.postgresql:postgresql:42.7.3'
 
+    // Mã hóa mật khẩu
     implementation 'org.mindrot:jbcrypt:0.4'
+    implementation 'ch.qos.logback:logback-classic:1.2.13'
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
-
+    // Logging
     implementation 'org.slf4j:slf4j-api:1.7.36'
     implementation 'ch.qos.logback:logback-classic:1.2.13'
 
-    jettyRunnerLibs 'org.eclipse.jetty:jetty-runner:9.4.51.v20230217' }
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+
+    // Jetty Runner (chạy WAR)
+    jettyRunnerLibs 'org.eclipse.jetty:jetty-runner:9.4.51.v20230217'
+}
 
 test {
     useJUnitPlatform()
 }
 
+// Task để tải jetty-runner.jar vào thư mục build/jetty-runner
+task downloadJettyRunner(type: Copy) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from configurations.jettyRunnerLibs
+    into "$buildDir/jetty-runner"
+    rename { "jetty-runner.jar" }
+}
 
+// Tùy chỉnh tên file WAR
 war {
     archiveFileName = 'PersonalWebsite-1.0-SNAPSHOT.war'
 }
-

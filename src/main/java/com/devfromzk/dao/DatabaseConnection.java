@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
 public class DatabaseConnection {
     private static final Logger logger = LoggerFactory.getLogger(DatabaseConnection.class);
 
-    private static final String LOCAL_MYSQL_URL = "jdbc:mysql://localhost:3306/personalwebdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String LOCAL_MYSQL_URL = "jdbc:mysql://gondola.proxy.rlwy.net:11091/railway";
     private static final String LOCAL_MYSQL_USER = "root";
-    private static final String LOCAL_MYSQL_PASSWORD = "khanh7679";
+    private static final String LOCAL_MYSQL_PASSWORD = "PjxtSxlkWLrrdUVwuXbPcPKiTiSFHzTG";
     private static final String MYSQL_DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
     private static final String POSTGRESQL_DRIVER_CLASS = "org.postgresql.Driver";
 
